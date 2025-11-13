@@ -1,0 +1,323 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.glass-panel {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 25px 45px rgba(15, 23, 42, 0.45);
+}
+
+.floating-orbs {
+  position: absolute;
+  inset: -20% -10% auto -10%;
+  height: 120vh;
+  background: radial-gradient(circle at 20% 20%, rgba(14, 165, 233, 0.23), transparent 45%),
+    radial-gradient(circle at 80% 10%, rgba(99, 102, 241, 0.27), transparent 45%),
+    radial-gradient(circle at 50% 70%, rgba(16, 185, 129, 0.19), transparent 50%);
+  filter: blur(80px);
+  animation: orb-drift 18s ease-in-out infinite alternate;
+}
+
+.floating-orbs--alt {
+  inset: auto -20% -40% 10%;
+  height: 100vh;
+  opacity: 0.6;
+  animation: orb-drift-alt 24s ease-in-out infinite alternate;
+}
+
+.hologram-ring {
+  background: radial-gradient(circle at center, rgba(6, 182, 212, 0.35), transparent 65%);
+}
+
+.hologram-base::before {
+  content: '';
+  position: absolute;
+  inset: auto 15% 2rem;
+  height: 6rem;
+  background: radial-gradient(circle at center, rgba(165, 243, 252, 0.25), transparent 70%);
+  filter: blur(18px);
+}
+
+.orbital-path {
+  backdrop-filter: blur(12px);
+  animation: orbit-glow 12s linear infinite;
+}
+
+.bot-runway {
+  animation: runway-glow 3.5s ease-in-out infinite;
+}
+
+.bot-actor {
+  position: relative;
+  height: 9.5rem;
+  width: 9.5rem;
+  animation: bot-bob 3.5s ease-in-out infinite;
+}
+
+.bot-core {
+  position: relative;
+  height: 5.5rem;
+  width: 5.5rem;
+  margin: 0 auto;
+  border-radius: 2.75rem;
+  background: linear-gradient(145deg, rgba(240, 249, 255, 0.85), rgba(59, 130, 246, 0.6));
+  box-shadow:
+    inset 0 8px 18px rgba(255, 255, 255, 0.4),
+    inset 0 -8px 18px rgba(37, 99, 235, 0.5),
+    0 12px 45px rgba(59, 130, 246, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bot-glider {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: bot-glide 16s ease-in-out infinite alternate;
+}
+
+.bot-face {
+  position: relative;
+  width: 3.4rem;
+  height: 2.2rem;
+  border-radius: 1.6rem;
+  background: radial-gradient(120% 120% at center, rgba(15, 23, 42, 0.9) 0%, rgba(15, 23, 42, 0.5) 55%, rgba(14, 116, 144, 0.3) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  overflow: hidden;
+  box-shadow: inset 0 0 12px rgba(14, 165, 233, 0.5);
+}
+
+.bot-eye {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(244, 244, 255, 1) 0%, rgba(129, 140, 248, 0.8) 55%, rgba(99, 102, 241, 0.2) 100%);
+  animation: bot-eye-blink 6s infinite;
+}
+
+.bot-eye:nth-child(2) {
+  animation-delay: 0.6s;
+}
+
+.bot-mouth {
+  position: absolute;
+  inset: auto 30% -12%;
+  height: 0.45rem;
+  border-radius: 0.35rem;
+  background: linear-gradient(90deg, rgba(56, 189, 248, 0.8), rgba(129, 140, 248, 0.8));
+  filter: blur(0.6px);
+}
+
+.bot-body {
+  position: relative;
+  margin: 0.6rem auto 0;
+  width: 4.7rem;
+  height: 2.4rem;
+  border-radius: 1.4rem 1.4rem 2rem 2rem;
+  background: linear-gradient(140deg, rgba(96, 165, 250, 0.9), rgba(14, 165, 233, 0.75));
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+  padding: 0.45rem 0.6rem;
+  box-shadow:
+    inset 0 1px 6px rgba(236, 254, 255, 0.7),
+    inset 0 -5px 12px rgba(12, 74, 110, 0.4),
+    0 12px 22px rgba(59, 130, 246, 0.25);
+}
+
+.bot-body span {
+  position: relative;
+  display: block;
+  height: 100%;
+  border-radius: 0.6rem;
+  background: linear-gradient(180deg, rgba(240, 249, 255, 0.95), rgba(96, 165, 250, 0.3));
+  box-shadow: inset 0 -3px 6px rgba(37, 99, 235, 0.45);
+  animation: bot-pulse 4s ease-in-out infinite;
+}
+
+.bot-body span:nth-child(2) {
+  animation-delay: 1.6s;
+}
+
+.bot-legs {
+  margin-top: 0.6rem;
+  display: flex;
+  justify-content: center;
+  gap: 1.1rem;
+}
+
+.bot-legs span {
+  position: relative;
+  width: 0.8rem;
+  height: 2.4rem;
+  border-radius: 0.6rem;
+  background: linear-gradient(180deg, rgba(234, 244, 255, 0.9), rgba(59, 130, 246, 0.4));
+  box-shadow:
+    inset 0 -4px 6px rgba(37, 99, 235, 0.35),
+    0 12px 18px rgba(30, 64, 175, 0.2);
+  animation: bot-leg-step 1.3s ease-in-out infinite;
+  transform-origin: top center;
+}
+
+.bot-legs span:nth-child(2) {
+  animation-delay: 0.65s;
+}
+
+.typing-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.typing-indicator span {
+  display: block;
+  height: 0.4rem;
+  width: 0.4rem;
+  border-radius: 9999px;
+  background: currentColor;
+  opacity: 0.5;
+  animation: typing-bob 1.2s ease-in-out infinite;
+}
+
+.typing-indicator span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes orb-drift {
+  0% {
+    transform: translate3d(-5%, 0, 0) scale(1);
+  }
+  100% {
+    transform: translate3d(5%, -3%, 0) scale(1.05);
+  }
+}
+
+@keyframes orb-drift-alt {
+  0% {
+    transform: translate3d(4%, 0, 0) scale(0.95);
+  }
+  100% {
+    transform: translate3d(-6%, 6%, 0) scale(1.1);
+  }
+}
+
+@keyframes orbit-glow {
+  0% {
+    box-shadow: 0 0 0 rgba(56, 189, 248, 0);
+    transform: rotate(0deg);
+  }
+  100% {
+    box-shadow: 0 0 30px rgba(6, 182, 212, 0.2);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes runway-glow {
+  0%,
+  100% {
+    opacity: 0.35;
+    box-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
+  }
+  50% {
+    opacity: 0.65;
+    box-shadow: 0 0 40px rgba(6, 182, 212, 0.7);
+  }
+}
+
+@keyframes bot-glide {
+  0% {
+    transform: translateX(-120%);
+  }
+  50% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+@keyframes bot-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12%);
+  }
+}
+
+@keyframes bot-eye-blink {
+  0%,
+  100%,
+  92% {
+    transform: scaleY(1);
+  }
+  95% {
+    transform: scaleY(0.05);
+  }
+}
+
+@keyframes bot-pulse {
+  0%,
+  100% {
+    opacity: 0.9;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+@keyframes bot-leg-step {
+  0%,
+  100% {
+    transform: rotate(6deg);
+  }
+  50% {
+    transform: rotate(-6deg);
+  }
+}
+
+@keyframes typing-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(-0.4rem);
+    opacity: 1;
+  }
+}
